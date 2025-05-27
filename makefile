@@ -1,12 +1,21 @@
-all: 
-	make compile
-	make test
-	make run
-compile:
-	find ./ -type f -name "*.java" > compfiles.txt ; javac -encoding utf-8 -d build -cp lib/junit-platform-console-standalone-1.5.2.jar @compfiles.txt
-run:
-	java -cp build miPrincipal.Principal
-test:
-	java -jar lib/junit-platform-console-standalone-1.5.2.jar --class-path build --scan-class-path
+# Makefile para compilar y ejecutar el proyecto Java
+
+SRC_DIR=src
+BUILD_DIR=build
+LIB_DIR=lib
+CLASSPATH=$(LIB_DIR)/flatlaf-3.6.jar:$(LIB_DIR)/junit-platform-console-standalone-1.5.2.jar
+MAIN_CLASS=almacen.Main
+
+JAVA_FILES=$(shell find $(SRC_DIR) -name "*.java")
+
+.PHONY: all run clean
+
+all:
+	mkdir -p $(BUILD_DIR)
+	javac -encoding utf-8 -d $(BUILD_DIR) -cp "$(CLASSPATH)" $(JAVA_FILES)
+
+run: all
+	java -cp "$(BUILD_DIR):$(CLASSPATH)" $(MAIN_CLASS)
+
 clean:
-	rm -r ./build/*
+	rm -rf $(BUILD_DIR)

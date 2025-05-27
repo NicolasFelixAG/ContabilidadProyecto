@@ -1,2 +1,6 @@
-./miPrincipal/Principal.java
+./src/almacen/Main.java
+./src/almacen/view/AlmacenPanel.java
+./src/almacen/model/Operacion.java
+./src/almacen/model/Producto.java
+./src/almacen/logic/InventarioManager.java
 ./miTest/AppTest.java
